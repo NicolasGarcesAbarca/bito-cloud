@@ -1,8 +1,12 @@
 
 import {onRequest} from "firebase-functions/v2/https";
-import * as logger from "firebase-functions/logger";
+import * as express from "express";
+import {routes} from "./routes";
+import {initializeApp} from "firebase-admin/app";
 
-export const helloworld = onRequest((request, response) => {
-  logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Firebase!");
-});
+const app = express();
+app.use(express.json());
+app.use(routes);
+initializeApp();
+
+export const bito = onRequest(app);
