@@ -4,7 +4,6 @@ import {createUserDB} from "../service/firestore/User";
 
 export const createUser = async (req:Request, res:Response)=>{
   const {name, email, password} = req.body;
-  console.log(email);
   try {
     const user = await getAuth()
       .createUser({email, password, displayName: name});
