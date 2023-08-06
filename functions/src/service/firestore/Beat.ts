@@ -1,4 +1,5 @@
 import {db} from "../..";
+
 type TcreateBeat = {
     title:string
     price:string
@@ -16,4 +17,14 @@ export const createBeatDB = async (
     imageURL,
     userUid: uid,
   });
+};
+
+export const getAllBeats = async ()=>{
+  try {
+    const querySnapshot = await db.collection("beats").get();
+    const list = querySnapshot.docs.map((doc)=>doc.data());
+    return list;
+  } catch (err) {
+    throw new Error("Error en query beats");
+  }
 };
